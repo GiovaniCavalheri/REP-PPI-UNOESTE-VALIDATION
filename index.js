@@ -8,73 +8,6 @@ server.use(express.static("publico"));
 
 const empresas = [];
 
-// ==> get para login
-server.get("/login", (req, res) => {
-  const html = `
-  <html>
-  <head>
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-
-  <body class="bg-dark">
-
-  <div class="container py-5">
-    <div class="card">
-      <div class="card-body">
-
-        <h2>Login</h2>
-
-        <form method="POST" action="/login">
-
-          <div class="mb-3">
-            <label>Usuário</label>
-            <input type="text" name="usuario" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label>Senha</label>
-            <input type="password" name="senha" class="form-control">
-          </div>
-
-          <button class="btn btn-primary">Entrar</button>
-
-        </form>
-
-      </div>
-    </div>
-  </div>
-
-  </body>
-  </html>
-  `;
-
-  res.send(html);
-});
-
-
-server.post("/login", (req, res) => {
-  const { usuario, senha } = req.body;
-
-  if (usuario === "adm" && senha === "123") {
-    res.send(
-      `<script>alert("Login realizado com sucesso"); window.location="/";</script>`,
-    );
-  } else {
-    res.send(
-      `<script>alert("Usuário ou senha invalido"); window.location="/login";</script>`,
-    );
-  }
-});
-
-// ==> sair
-server.get("/logout", (req, res) => {
-  res.send(
-    `<script>alert("Logout efetuado com sucesso"); window.location="/";</script>`,
-  );
-});
-
-
 // ROTA GET
 server.get("/", (req, res) => {
   let lista = "";
@@ -190,6 +123,76 @@ server.get("/", (req, res) => {
 
   res.send(html);
 });
+
+
+// ==> get para login
+server.get("/login", (req, res) => {
+  const html = `
+  <html>
+  <head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-dark">
+
+  <div class="container py-5">
+    <div class="card">
+      <div class="card-body">
+
+        <h2>Login</h2>
+
+        <form method="POST" action="/login">
+
+          <div class="mb-3">
+            <label>Usuário</label>
+            <input type="text" name="usuario" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label>Senha</label>
+            <input type="password" name="senha" class="form-control">
+          </div>
+
+          <button class="btn btn-primary">Entrar</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  </body>
+  </html>
+  `;
+
+  res.send(html);
+});
+
+
+server.post("/login", (req, res) => {
+  const { usuario, senha } = req.body;
+
+  if (usuario === "adm" && senha === "123") {
+    res.send(
+      `<script>alert("Login realizado com sucesso"); window.location="/";</script>`,
+    );
+  } else {
+    res.send(
+      `<script>alert("Usuário ou senha invalido"); window.location="/login";</script>`,
+    );
+  }
+});
+
+// ==> sair
+server.get("/logout", (req, res) => {
+  res.send(
+    `<script>alert("Logout efetuado com sucesso"); window.location="/";</script>`,
+  );
+});
+
+
+
 
 server.post("/submit", (req, res) => {
   const { cnpj, razao, fantasia, Endereco, cidade, UF, CEP, EMAIL, phone } =
